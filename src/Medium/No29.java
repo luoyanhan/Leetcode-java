@@ -23,8 +23,7 @@ public class No29 {
                 dividend -= tmp;
                 res += count;
             }
-            res = sign>0?res:res*sign;
-            return res;
+            return res*sign;
         }
     }
 }
