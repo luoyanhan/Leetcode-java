@@ -3,7 +3,7 @@ package Medium;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class eight_hundred_forty_six {
+public class No846 {
     class Solution{
         public boolean isNStraightHand(int[] hand, int groupSize) {
             int n = hand.length;
