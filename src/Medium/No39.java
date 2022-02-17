@@ -16,7 +16,7 @@ public class No39 {
             if (idx>=candidates.length){
                 return ;
             }else if (target==0){
-                res.add(new ArrayList<Integer>(tmp));;
+                res.add(new ArrayList<Integer>(tmp));
             }else {
                 dfs(res, tmp, idx+1, target, candidates);
                 if (target-candidates[idx]>=0){
