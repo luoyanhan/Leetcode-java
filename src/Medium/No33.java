@@ -9,14 +9,14 @@ public class No33 {
                 if (target==nums[mid]){
                     return mid;
                 }
-                if (nums[mid]>=nums[0]){
-                    if (target>=nums[0] && target<nums[mid]){
+                if (nums[mid]>=nums[left]){
+                    if (target>=nums[left] && target<nums[mid]){
                         right = mid-1;
                     }else {
                         left = mid+1;
                     }
                 }else {
-                    if (target>nums[mid] && target<=nums[len-1]){
+                    if (target>nums[mid] && target<=nums[right]){
                         left = mid+1;
                     }else {
                         right = mid-1;
