@@ -26,20 +26,19 @@ public class No93 {
             }else {
                 if (curIdx==s.length()){
                     return;
+                }
+                if (s.charAt(curIdx)=='0'){
+                    tmp[partId] = 0;
+                    dfs(s, partId+1, curIdx+1);
                 }else {
-                    if (s.charAt(curIdx)=='0'){
-                        tmp[partId] = 0;
-                        dfs(s, partId+1, curIdx+1);
-                    }else {
-                        int sum = 0;
-                        for (int newIdx = curIdx; newIdx < s.length(); newIdx++) {
-                            sum = (s.charAt(newIdx) - '0') + sum * 10;
-                            if (sum < 0 || sum > 255) {
-                                break;
-                            }
-                            tmp[partId] = sum;
-                            dfs(s, partId + 1, newIdx + 1);
+                    int sum = 0;
+                    for (int newIdx = curIdx; newIdx < s.length(); newIdx++) {
+                        sum = (s.charAt(newIdx) - '0') + sum * 10;
+                        if (sum < 0 || sum > 255) {
+                            break;
                         }
+                        tmp[partId] = sum;
+                        dfs(s, partId + 1, newIdx + 1);
                     }
                 }
             }
