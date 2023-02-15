@@ -7,14 +7,13 @@ class Solution {
     }
 
     public int recursion(TreeNode node, int sum){
-        if (node==null){
-            return 0;
-        }
         sum = sum*10 + node.val;
         if (node.left==null && node.right==null){
             return sum;
         }else {
-            return recursion(node.left, sum) + recursion(node.right, sum);
+            int leftSum = node.left!=null?recursion(node.left, sum):0;
+            int rightSum = node.right!=null?recursion(node.right, sum):0;
+            return leftSum+rightSum;
         }
     }
 }
