@@ -5,61 +5,63 @@ class Solution {
         if (head==null){
             return head;
         }
-        ListNode dummyHead = new ListNode();
-        dummyHead.next = head;
         ListNode cur = head;
-        int length = 1;
+        int lenOfList = 1;
         while (cur.next!=null){
             cur = cur.next;
-            length++;
+            lenOfList++;
         }
-        for (int curLength=1; curLength<=length; curLength*=2){
-            ListNode pre = dummyHead;
+        ListNode dummyHead = new ListNode();
+        dummyHead.next = head;
+        for (int lenThisTime = 1; lenThisTime<=lenOfList; lenThisTime*=2){
             cur = dummyHead.next;
+            ListNode pre = dummyHead;
             while (cur!=null){
                 ListNode head1 = cur;
-                for (int i=1; i<curLength && cur.next!=null; i++){
+                for (int i=1; i<lenThisTime&&cur.next!=null; i++){
                     cur = cur.next;
                 }
                 ListNode head2 = cur.next;
                 cur.next = null;
                 cur = head2;
-                for (int i=1; i<curLength && cur!=null && cur.next!=null; i++){
+                for (int i=1; i<lenThisTime&&cur!=null&&cur.next!=null; i++){
                     cur = cur.next;
                 }
-                ListNode next = null;
-                if (cur!=null){
-                    next = cur.next;
+                ListNode nextHead = null;
+                if (cur!=null) {
+                    nextHead = cur.next;
                     cur.next = null;
                 }
-                pre.next = merge(head1, head2);
+                ListNode mergedNode = merge(head1, head2);
+                pre.next = mergedNode;
                 while (pre.next!=null){
                     pre = pre.next;
                 }
-                cur = next;
+                pre.next = nextHead;
+                cur = nextHead;
             }
         }
         return dummyHead.next;
     }
 
-    public ListNode merge(ListNode node1, ListNode node2){
+    public ListNode merge(ListNode head1, ListNode head2){
         ListNode dummyHead = new ListNode();
-        ListNode temp = dummyHead;
-        while (node1!=null && node2!=null){
-            if (node1.val<=node2.val){
-                temp.next = node1;
-                node1 = node1.next;
+        ListNode cur = dummyHead;
+        while (head1!=null && head2!=null){
+            if (head1.val<=head2.val){
+                cur.next = head1;
+                head1 = head1.next;
             }else {
-                temp.next = node2;
-                node2 = node2.next;
+                cur.next = head2;
+                head2 = head2.next;
             }
-            temp = temp.next;
+            cur = cur.next;
         }
-        if (node1!=null){
-            temp.next = node1;
+        if (head1!=null){
+            cur.next = head1;
         }
-        if (node2!=null){
-            temp.next = node2;
+        if (head2!=null){
+            cur.next = head2;
         }
         return dummyHead.next;
     }
