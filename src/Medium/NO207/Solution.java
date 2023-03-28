@@ -18,8 +18,8 @@ class Solution {
             records.get(each[0]).add(each[1]);
         }
         visited = new int[numCourses];
-        for (int i=0; i<numCourses; i++){
-            if (visited[i]==0 && vaild){
+        for (int i=0; i<numCourses && vaild; i++){
+            if (visited[i]==0){
                 recursion(i);
             }
         }
@@ -33,7 +33,7 @@ class Solution {
                 recursion(i);
             }else if (visited[i]==1){
                 vaild = false;
-                break;
+                return;
             }
         }
         visited[num] = 2;
