@@ -20,7 +20,6 @@ package Medium.NO209;
 //    }
 //}
 
-import java.util.Arrays;
 
 class Solution {
     public int minSubArrayLen(int target, int[] nums) {
@@ -30,16 +29,32 @@ class Solution {
         for (int i=0; i<len; i++){
             preSum[i+1] = preSum[i] + nums[i];
         }
-        for (int idx=1; idx<=len; idx++){
-            int sum = target + preSum[idx-1];
-            int pos = Arrays.binarySearch(preSum, sum);
+        for (int idx=0; idx<len; idx++){
+            int sum = target + preSum[idx];
+            int pos = bin(preSum, sum);
             if (pos<0){
                 pos = -pos-1;
             }
             if (pos<=len){
-                res = Math.min(res, pos-idx+1);
+                res = Math.min(res, pos-idx);
             }
         }
         return res==Integer.MAX_VALUE?0:res;
+    }
+
+    public int bin(int[] nums, int target){
+        int left=0, right = nums.length-1;
+        while (left<=right){
+            int mid = left + (right-left)/2;
+            if (nums[mid]==target){
+                return mid;
+            }
+            else if (target>nums[mid]){
+                left = mid+1;
+            }else {
+                right = mid-1;
+            }
+        }
+        return left;
     }
 }
