@@ -18,7 +18,6 @@ class Solution {
     }
 
     public int partition(int[] nums, int left, int right){
-        System.out.println(right);
         int tar = nums[right];
         int slow = left-1;
         for (int fast=left; fast<right; fast++){
