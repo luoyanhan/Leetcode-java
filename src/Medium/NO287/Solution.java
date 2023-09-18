@@ -23,18 +23,50 @@ package Medium.NO287;
 //}
 
 
+//class Solution {
+//    public int findDuplicate(int[] nums) {
+//        int slow = 0, fast = 0;
+//        do {
+//            slow = nums[slow];
+//            fast = nums[nums[fast]];
+//        }while (fast!=slow);
+//        int ptr = 0;
+//        while (ptr!=slow){
+//            ptr = nums[ptr];
+//            slow = nums[slow];
+//        }
+//        return slow;
+//    }
+//}
+
+
 class Solution {
     public int findDuplicate(int[] nums) {
-        int slow = 0, fast = 0;
-        do {
-            slow = nums[slow];
-            fast = nums[nums[fast]];
-        }while (fast!=slow);
-        int ptr = 0;
-        while (ptr!=slow){
-            ptr = nums[ptr];
-            slow = nums[slow];
+        int bitMax = 30;
+        int res = 0;
+        int len = nums.length, maxNum = len-1;
+        while (bitMax>=0){
+            int onePos = 1<<bitMax;
+            if ((maxNum&onePos)!=0){
+                break;
+            }
+            bitMax--;
         }
-        return slow;
+        for (int bitIdx=0; bitIdx<=bitMax; bitIdx++){
+            int x = 0, y=0;
+            int onePos = 1<<bitIdx;
+            for (int idx=0; idx<len; idx++){
+                if ((idx&onePos)!=0){
+                    x++;
+                }
+                if ((nums[idx]&onePos)!=0){
+                    y++;
+                }
+            }
+            if (y>x){
+                res = res|onePos;
+            }
+        }
+        return res;
     }
 }
