@@ -3,9 +3,9 @@ package Medium.NO287;
 //class Solution {
 //    public int findDuplicate(int[] nums) {
 //        int len = nums.length;
-//        int left = 0, right = len;
+//        int left = 1, right = len;
 //        while (left<right){
-//            int mid = left + (right-left)/2;
+//            int mid = (left+right)/2;
 //            int cnt = 0;
 //            for (int num:nums){
 //                if (num<=mid){
@@ -18,7 +18,7 @@ package Medium.NO287;
 //                right = mid;
 //            }
 //        }
-//        return right;
+//        return left;
 //    }
 //}
 
@@ -56,7 +56,7 @@ class Solution {
             int x = 0, y=0;
             int onePos = 1<<bitIdx;
             for (int idx=0; idx<len; idx++){
-                if ((idx&onePos)!=0){
+                if (idx>0 && (idx&onePos)!=0){
                     x++;
                 }
                 if ((nums[idx]&onePos)!=0){
