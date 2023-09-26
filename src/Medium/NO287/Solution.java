@@ -18,7 +18,7 @@ package Medium.NO287;
 //                right = mid;
 //            }
 //        }
-//        return left;
+//        return right;
 //    }
 //}
 
@@ -43,29 +43,22 @@ package Medium.NO287;
 class Solution {
     public int findDuplicate(int[] nums) {
         int bitMax = 30;
-        int res = 0;
-        int len = nums.length, maxNum = len-1;
-        while (bitMax>=0){
-            int onePos = 1<<bitMax;
-            if ((maxNum&onePos)!=0){
+        int len = nums.length;
+        while (bitMax>0){
+            if (((1<<bitMax)&(len-1))!=0){
                 break;
             }
             bitMax--;
         }
-        for (int bitIdx=0; bitIdx<=bitMax; bitIdx++){
-            int x = 0, y=0;
-            int onePos = 1<<bitIdx;
+        int res = 0;
+        for (int i=0; i<=bitMax; i++){
+            int findOne = 1<<i;
+            int x=0, y=0;
             for (int idx=0; idx<len; idx++){
-                if (idx>0 && (idx&onePos)!=0){
-                    x++;
-                }
-                if ((nums[idx]&onePos)!=0){
-                    y++;
-                }
+                if (idx>0&(idx&findOne)!=0){x++;}
+                if ((nums[idx]&findOne)!=0){y++;}
             }
-            if (y>x){
-                res = res|onePos;
-            }
+            if (y>x){res = res|findOne;}
         }
         return res;
     }
